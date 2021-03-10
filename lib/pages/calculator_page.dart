@@ -25,7 +25,7 @@ class __CalculatatorPageStateState extends State<CalculatorPage> {
   }
 
   Widget _buildAppBar() =>
-      AppBar(title: Text("Calculadora"), backgroundColor: Colors.blue);
+      AppBar(title: Text("Calculadora"), backgroundColor: Colors.black);
 
   Widget _buildDisplay({String text}) {
     return Expanded(
@@ -35,7 +35,8 @@ class __CalculatatorPageStateState extends State<CalculatorPage> {
         child: Text(
           text ?? '0',
           textAlign: TextAlign.end,
-          style: TextStyle(color: Colors.white, fontSize: 62),
+          style: TextStyle(
+              color: Colors.white, fontSize: 62, fontFamily: 'Calculator_font'),
         ),
       ),
     );
