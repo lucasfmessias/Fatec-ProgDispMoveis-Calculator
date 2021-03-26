@@ -62,10 +62,10 @@ class __CalculatatorPageStateState extends State<CalculatorPage> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _buildButton(label: "AC", color: Colors.lightBlueAccent),
-          _buildButton(label: "DEL", color: Colors.lightBlueAccent),
-          _buildButton(label: "%", color: Colors.lightBlueAccent),
-          _buildButton(label: "/", color: Colors.lightBlueAccent)
+          _buildButton(label: "AC", colorText: Colors.orange[400]),
+          _buildButton(label: "DEL", colorText: Colors.orange[400]),
+          _buildButton(label: "%", colorText: Colors.orange[400]),
+          _buildButton(label: "/", colorText: Colors.orange[400])
         ],
       ),
     );
@@ -79,7 +79,7 @@ class __CalculatatorPageStateState extends State<CalculatorPage> {
           _buildButton(label: "7"),
           _buildButton(label: "8"),
           _buildButton(label: "9"),
-          _buildButton(label: "*", color: Colors.lightBlueAccent)
+          _buildButton(label: "*", colorText: Colors.orange[400]),
         ],
       ),
     );
@@ -93,7 +93,7 @@ class __CalculatatorPageStateState extends State<CalculatorPage> {
           _buildButton(label: "4"),
           _buildButton(label: "5"),
           _buildButton(label: "6"),
-          _buildButton(label: "+", color: Colors.lightBlueAccent)
+          _buildButton(label: "+", colorText: Colors.orange[400])
         ],
       ),
     );
@@ -107,7 +107,7 @@ class __CalculatatorPageStateState extends State<CalculatorPage> {
           _buildButton(label: "1"),
           _buildButton(label: "2"),
           _buildButton(label: "3"),
-          _buildButton(label: "-", color: Colors.lightBlueAccent)
+          _buildButton(label: "-", colorText: Colors.orange[400])
         ],
       ),
     );
@@ -120,22 +120,25 @@ class __CalculatatorPageStateState extends State<CalculatorPage> {
         children: [
           _buildButton(label: "."),
           _buildButton(label: "0", flex: 2),
-          _buildButton(label: "=", color: Colors.lightBlueAccent)
+          _buildButton(label: "=", colorButton: Colors.orange[400])
         ],
       ),
     );
   }
 
   Widget _buildButton(
-      {String label, int flex = 1, Color color = Colors.white}) {
+      {String label,
+      int flex = 1,
+      Color colorText = Colors.white,
+      Color colorButton = Colors.black}) {
     return Expanded(
       flex: flex,
       child: RaisedButton(
         child: Text(
           label,
-          style: TextStyle(fontSize: 24, color: color),
+          style: TextStyle(fontSize: 24, color: colorText),
         ),
-        color: Colors.black,
+        color: colorButton,
         onPressed: () => _calculateLogic(label),
       ),
     );
