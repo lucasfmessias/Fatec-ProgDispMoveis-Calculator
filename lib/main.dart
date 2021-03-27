@@ -1,4 +1,5 @@
-import 'package:calculator/pages/calculator_page.dart';
+import 'core/theme_app.dart';
+import 'pages/calculator_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,10 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        primarySwatch: Colors.deepPurple,
-      ),
+      theme: kAppTheme,
       home: CalculatorPage(),
     );
   }

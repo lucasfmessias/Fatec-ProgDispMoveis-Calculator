@@ -1,5 +1,6 @@
-import 'package:calculator/controllers/calculator_controller.dart';
+import '../controllers/calculator_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 class CalculatorPage extends StatefulWidget {
   @override
@@ -24,8 +25,18 @@ class __CalculatatorPageStateState extends State<CalculatorPage> {
     );
   }
 
-  Widget _buildAppBar() =>
-      AppBar(title: Text("Calculadora"), backgroundColor: Colors.black);
+  Widget _buildAppBar() {
+    return AppBar(
+      title: Text("Calculadora"),
+      backgroundColor: Colors.black,
+      actions: <Widget>[
+        new IconButton(
+          icon: new Icon(Icons.share),
+          onPressed: () => _shareApplication(context),
+        ),
+      ],
+    );
+  }
 
   Widget _buildDisplay({String text}) {
     return Expanded(
@@ -148,5 +159,13 @@ class __CalculatatorPageStateState extends State<CalculatorPage> {
     setState(() {
       _controller.applyCommand(label);
     });
+  }
+
+  void _shareApplication(BuildContext context) {
+    final RenderBox box = context.findRenderObject();
+    final String text = "Share calculator app";
+
+    Share.share(text,
+        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
   }
 }

@@ -1,12 +1,6 @@
-class CalculatorController {
-  static const kZero = '0';
-  static const kMemoryFirst = 0;
-  static const kMemoryClear = [0.0, 0.0];
-  static const kOperationNull = null;
-  static const kPoint = '.';
-  static const kEmpty = '';
-  static const kOperations = ['+', '-', '*', '/', '%', '='];
+import '../core/constants.dart';
 
+class CalculatorController {
   List<double> _memories = [0.0, 0.0];
   int _currentMemoryIndex = 0;
   String _operation;
