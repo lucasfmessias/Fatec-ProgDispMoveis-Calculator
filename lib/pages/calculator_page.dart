@@ -9,6 +9,7 @@ class CalculatorPage extends StatefulWidget {
 
 class __CalculatatorPageStateState extends State<CalculatorPage> {
   final _controller = CalculatorController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,6 +18,7 @@ class __CalculatatorPageStateState extends State<CalculatorPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          _buildDisplayHistory(text: _controller.history.join().toString()),
           _buildDisplay(text: _controller.result),
           Divider(color: Colors.blue),
           _buildKeyboard(),
@@ -47,7 +49,22 @@ class __CalculatatorPageStateState extends State<CalculatorPage> {
           text ?? '0',
           textAlign: TextAlign.end,
           style: TextStyle(
-              color: Colors.white, fontSize: 62, fontFamily: 'Calculator_font'),
+              color: Colors.white, fontSize: 72, fontFamily: 'Calculator_font'),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDisplayHistory({String text}) {
+    return Expanded(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        alignment: Alignment.bottomRight,
+        child: Text(
+          text ?? '',
+          textAlign: TextAlign.end,
+          style: TextStyle(
+              color: Colors.white, fontSize: 42, fontFamily: 'Calculator_font'),
         ),
       ),
     );

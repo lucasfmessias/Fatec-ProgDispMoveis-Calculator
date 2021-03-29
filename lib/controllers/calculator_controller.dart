@@ -4,8 +4,12 @@ class CalculatorController {
   List<double> _memories = [0.0, 0.0];
   int _currentMemoryIndex = 0;
   String _operation;
+  String _lastOperation;
+  String _aux;
   bool _usedOperation;
+  bool _usedEqual;
   String result;
+  List<String> history = [];
 
   CalculatorController() {
     _clear();
@@ -17,6 +21,7 @@ class CalculatorController {
     _currentMemoryIndex = kMemoryFirst;
     _operation = kOperationNull;
     _usedOperation = false;
+    _usedEqual = false;
   }
 
   void _deleteDigit() {
@@ -26,6 +31,8 @@ class CalculatorController {
     } else {
       result = kZero;
     }
+    _memories[_currentMemoryIndex] =
+        double.parse(result.replaceAll(kPoint, '.'));
   }
 
   void _addDigit(String digit) {
@@ -44,16 +51,24 @@ class CalculatorController {
 
     if (_currentMemoryIndex == kMemoryFirst) {
       _currentMemoryIndex++;
-    } else {
+    } else if (!_usedEqual || (_usedEqual && operation == '=')) {
       _memories[kMemoryFirst] = _calculate();
     }
 
-    if (operation != '=') _operation = operation;
+    if (operation != '=') {
+      _operation = operation;
+      _usedEqual = false;
+    } else {
+      _usedEqual = true;
+    }
 
+    _outputFormat();
+    _usedOperation = true;
+  }
+
+  void _outputFormat() {
     result = _memories[kMemoryFirst].toString();
     result = result.endsWith('.0') ? result.replaceAll('.0', '') : result;
-
-    _usedOperation = true;
   }
 
   double _calculate() {
@@ -66,6 +81,17 @@ class CalculatorController {
   }
 
   void applyCommand(String command) {
+    // print('$_lastOperation != $command');
+
+    if (_lastOperation != command) _showHistory(command);
+
+    if (_lastOperation == '=') {
+      history.removeRange(0, history.length);
+      _showHistory(command);
+    }
+
+    if (_lastOperation == '=' && !kOperations.contains(command)) _clear();
+
     if (command == 'AC') {
       _clear();
     } else if (command == 'DEL') {
@@ -75,5 +101,22 @@ class CalculatorController {
     } else {
       _addDigit(command);
     }
+
+    _lastOperation = command;
+  }
+
+  List<String> _showHistory(String button) {
+    _aux = result;
+
+    if (button == 'AC') history.removeRange(0, history.length);
+
+    if (button != '=' && kOperations.contains(button)) {
+      history.add('$_aux$button');
+      _aux = '';
+    }
+
+    if (button == '=') history.add('$result$button');
+
+    return history;
   }
 }
