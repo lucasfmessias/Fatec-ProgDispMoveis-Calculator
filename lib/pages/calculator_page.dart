@@ -20,7 +20,7 @@ class __CalculatatorPageStateState extends State<CalculatorPage> {
         children: [
           _buildDisplayHistory(text: _controller.history.join().toString()),
           _buildDisplay(text: _controller.result),
-          Divider(color: Colors.blue),
+          Divider(color: Colors.orange[400]),
           _buildKeyboard(),
         ],
       ),
